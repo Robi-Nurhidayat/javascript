@@ -276,3 +276,10 @@ labelBalance.addEventListener('click', function () {
     }
   });
 });
+
+console.log(1333333333333333333333333333333333333333333333333333333333333333n);
+
+console.log(BigInt(10) * 10n);
+
+// untuk menggunakan bigint bisa menggunakan huruf n diakhir angka -> 132223n
+// atau menggunakan fungsi BigInt()
