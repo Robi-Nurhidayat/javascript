@@ -266,3 +266,13 @@ console.log(Number.parseFloat('2.5rem'));
 
 console.log(Number.isFinite(20));
 console.log(Number.isFinite('20'));
+
+console.log(document.querySelectorAll('.movements__row'));
+
+labelBalance.addEventListener('click', function () {
+  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+    if (i % 2 === 0) {
+      row.style.backgroundColor = 'red';
+    }
+  });
+});
