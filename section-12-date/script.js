@@ -283,3 +283,10 @@ console.log(BigInt(10) * 10n);
 
 // untuk menggunakan bigint bisa menggunakan huruf n diakhir angka -> 132223n
 // atau menggunakan fungsi BigInt()
+
+// working with date
+
+console.log(new Date().toISOString());
+
+console.log(Date.now());
+console.log(new Date().getFullYear());
