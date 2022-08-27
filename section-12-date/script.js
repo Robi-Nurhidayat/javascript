@@ -16,14 +16,14 @@ const account1 = {
   pin: 1111,
 
   movementsDates: [
-    '2019-11-18T21:31:17.178Z',
-    '2019-12-23T07:42:02.383Z',
-    '2020-01-28T09:15:04.904Z',
-    '2020-04-01T10:17:24.185Z',
-    '2020-05-08T14:11:59.604Z',
-    '2020-05-27T17:01:17.194Z',
-    '2020-07-11T23:36:17.929Z',
-    '2020-07-12T10:51:36.790Z',
+    '2022-08-18T21:31:17.178Z',
+    '2022-08-23T07:42:02.383Z',
+    '2022-08-19T09:15:04.904Z',
+    '2022-08-06T10:17:24.185Z',
+    '2022-08-28T14:11:59.604Z',
+    '2022-08-27T17:01:17.194Z',
+    '2022-08-25T23:36:17.929Z',
+    '2022-08-26T10:51:36.790Z',
   ],
   currency: 'EUR',
   locale: 'pt-PT', // de-DE
@@ -81,6 +81,34 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
+const formatMovementDate = function (date) {
+  const hitungSelisihHari = (date1, date2) => {
+    // menggunakan fungsi Math.abs -> Math absolute
+    // agar hari nya tidak minus
+
+    return Math.round(Math.abs(date1 - date2) / (1000 * 60 * 60 * 24));
+  };
+
+  const dayPassed = hitungSelisihHari(new Date(), date);
+
+  if (dayPassed === 0) {
+    return 'Today';
+  }
+
+  if (dayPassed === 1) {
+    return 'Yesterday';
+  }
+  if (dayPassed <= 7) {
+    return `${dayPassed} days ago`;
+  } else {
+    const day = `${date.getDay()}`.padStart(2, 0);
+    const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
+};
+
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
@@ -92,12 +120,8 @@ const displayMovements = function (acc, sort = false) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const date = new Date(acc.movementsDates[i]);
-    const day = `${date.getDay()}`.padStart(2, 0);
-    const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    const year = date.getFullYear();
 
-    const displayDate = `${day}/${month}/${year}`;
-
+    const displayDate = formatMovementDate(date);
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
@@ -192,7 +216,7 @@ btnLogin.addEventListener('click', function (e) {
     const month = `${now.getMonth() + 1}`.padStart(2, 0);
     const year = now.getFullYear();
     const hour = `${now.getHours()}`.padStart(2, 0);
-    const minute = now.getMinutes().padStart(2, 0);
+    const minute = now.getMinutes();
     labelDate.textContent = `${day}/${month}/${year}, ${hour}:${minute}`;
 
     // Clear input fields
@@ -281,20 +305,20 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 // LECTURES
 
-console.log(0.1 + 0.2);
+// console.log(0.1 + 0.2);
 
-// conversion
-console.log(Number('23'));
+// // conversion
+// console.log(Number('23'));
 
 // parsing
 
-console.log(Number.parseInt('20px'));
-console.log(Number.parseFloat('2.5rem'));
+// console.log(Number.parseInt('20px'));
+// console.log(Number.parseFloat('2.5rem'));
 
-// cek angka atau bukan
+// // cek angka atau bukan
 
-console.log(Number.isFinite(20));
-console.log(Number.isFinite('20'));
+// console.log(Number.isFinite(20));
+// console.log(Number.isFinite('20'));
 
 console.log(document.querySelectorAll('.movements__row'));
 
@@ -306,16 +330,29 @@ labelBalance.addEventListener('click', function () {
   });
 });
 
-console.log(1333333333333333333333333333333333333333333333333333333333333333n);
+// console.log(1333333333333333333333333333333333333333333333333333333333333333n);
 
-console.log(BigInt(10) * 10n);
+// console.log(BigInt(10) * 10n);
 
 // untuk menggunakan bigint bisa menggunakan huruf n diakhir angka -> 132223n
 // atau menggunakan fungsi BigInt()
 
 // working with date
 
-console.log(new Date().toISOString());
+// console.log(new Date().toISOString());
 
-console.log(Date.now());
-console.log(new Date().getFullYear());
+// console.log(Date.now());
+// console.log(new Date().getFullYear());
+
+// operation with date
+
+// const hitungSelisihHari = (date1, date2) => {
+//   // menggunakan fungsi Math.abs -> Math absolute
+//   // agar hari nya tidak minus
+
+//   return Math.abs(date1 - date2) / (1000 * 60 * 60 * 24);
+// };
+
+// const date1 = hitungSelisihHari(new Date(2022, 8, 9), new Date(2022, 8, 21));
+
+// console.log(date1);
