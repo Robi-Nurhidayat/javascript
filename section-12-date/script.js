@@ -81,7 +81,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, locale) {
   const hitungSelisihHari = (date1, date2) => {
     // menggunakan fungsi Math.abs -> Math absolute
     // agar hari nya tidak minus
@@ -101,11 +101,13 @@ const formatMovementDate = function (date) {
   if (dayPassed <= 7) {
     return `${dayPassed} days ago`;
   } else {
-    const day = `${date.getDay()}`.padStart(2, 0);
-    const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    const year = date.getFullYear();
+    // const day = `${date.getDay()}`.padStart(2, 0);
+    // const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    // const year = date.getFullYear();
 
-    return `${day}/${month}/${year}`;
+    // return `${day}/${month}/${year}`;
+
+    return Intl.DateTimeFormat(locale).format(date);
   }
 };
 
@@ -121,7 +123,7 @@ const displayMovements = function (acc, sort = false) {
 
     const date = new Date(acc.movementsDates[i]);
 
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.locale);
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
@@ -211,13 +213,32 @@ btnLogin.addEventListener('click', function (e) {
     containerApp.style.opacity = 100;
 
     // create current date
-    const now = new Date();
-    const day = `${now.getDay()}`.padStart(2, 0);
-    const month = `${now.getMonth() + 1}`.padStart(2, 0);
-    const year = now.getFullYear();
-    const hour = `${now.getHours()}`.padStart(2, 0);
-    const minute = now.getMinutes();
-    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${minute}`;
+    // const now = new Date();
+    // const day = `${now.getDay()}`.padStart(2, 0);
+    // const month = `${now.getMonth() + 1}`.padStart(2, 0);
+    // const year = now.getFullYear();
+    // const hour = `${now.getHours()}`.padStart(2, 0);
+    // const minute = now.getMinutes();
+    // labelDate.textContent = `${day}/${month}/${year}, ${hour}:${minute}`;
+
+    const tgl = new Date();
+
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+      weekday: 'long',
+    };
+
+    // const locale = navigator.language;
+    // console.log(locale);
+
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(tgl);
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -356,3 +377,16 @@ labelBalance.addEventListener('click', function () {
 // const date1 = hitungSelisihHari(new Date(2022, 8, 9), new Date(2022, 8, 21));
 
 // console.log(date1);
+
+// const tgl = new Date();
+
+// const options = {
+//   hour: 'numeric',
+//   minute: 'numeric',
+//   day: 'numeric',
+//   month: 'numeric',
+//   year: 'numeric',
+//   weekday: 'long',
+// };
+
+// labelDate.textContent = new Intl.DateTimeFormat('en-US', options).format(tgl);
