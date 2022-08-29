@@ -420,3 +420,14 @@ console.log('Tunggu');
 if (bahan.includes('bawang')) {
   clearTimeout(bahanTimer);
 }
+
+// setInterval
+
+setInterval(() => {
+  const now = new Date();
+  const detik = now.getSeconds();
+  const menit = now.getMinutes();
+  const jam = now.getHours();
+  const fullJam = `${jam}:${menit}:${detik}`;
+  console.log(fullJam);
+}, 1000);
