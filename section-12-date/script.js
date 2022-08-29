@@ -401,3 +401,19 @@ labelBalance.addEventListener('click', function () {
 // };
 
 // labelDate.textContent = new Intl.DateTimeFormat('en-US', options).format(tgl);
+
+const bahan = ['jamur', 'bawang', 'cabai'];
+
+const bahanTimer = setTimeout(
+  (bahan1, bahan2) => {
+    console.log(`bahan 1 ${bahan1} dan bahan 2 ${bahan2}`);
+  },
+  3000,
+  ...bahan
+);
+
+console.log('Tunggu');
+
+if (bahan.includes('bawang')) {
+  clearTimeout(bahanTimer);
+}
