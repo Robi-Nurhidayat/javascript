@@ -198,9 +198,39 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const logOutTimer = function () {
+  const tick = function () {
+    const minute = String(Math.trunc(time / 60)).padStart(2, 0);
+    const second = String(time % 60).padStart(2, 0);
+
+    // in each call, print the remaining time to UI
+    labelTimer.textContent = `${minute}:${second}`;
+
+    // when 0 second time
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+
+      containerApp.style.opacity = 0;
+    }
+
+    // kurang time
+    // time -= 1
+    // atau gunakan tanda --
+    time--;
+  };
+  // set time 5 minutes
+  let time = 100;
+
+  tick();
+  // call the timer every second
+  timer = setInterval(tick, 1000);
+  return timer;
+};
+
 ///////////////////////////////////////
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
 
 // // fake always logged in
 // currentAccount = account1;
@@ -255,6 +285,10 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    // cara agar setip waktu berbeda
+    if (timer) clearInterval(timer);
+    timer = logOutTimer();
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -284,6 +318,11 @@ btnTransfer.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+
+    // reset timer
+
+    clearInterval(timer);
+    timer = logOutTimer();
   }
 });
 
@@ -304,6 +343,11 @@ btnLoan.addEventListener('click', function (e) {
     }, 3000);
   }
   inputLoanAmount.value = '';
+
+  // reset timer
+  clearInterval(timer);
+
+  timer = logOutTimer();
 });
 
 btnClose.addEventListener('click', function (e) {
@@ -405,29 +449,29 @@ labelBalance.addEventListener('click', function () {
 
 // labelDate.textContent = new Intl.DateTimeFormat('en-US', options).format(tgl);
 
-const bahan = ['jamur', 'bawang', 'cabai'];
+// const bahan = ['jamur', 'bawang', 'cabai'];
 
-const bahanTimer = setTimeout(
-  (bahan1, bahan2) => {
-    console.log(`bahan 1 ${bahan1} dan bahan 2 ${bahan2}`);
-  },
-  3000,
-  ...bahan
-);
+// const bahanTimer = setTimeout(
+//   (bahan1, bahan2) => {
+//     console.log(`bahan 1 ${bahan1} dan bahan 2 ${bahan2}`);
+//   },
+//   3000,
+//   ...bahan
+// );
 
-console.log('Tunggu');
+// console.log('Tunggu');
 
-if (bahan.includes('bawang')) {
-  clearTimeout(bahanTimer);
-}
+// if (bahan.includes('bawang')) {
+//   clearTimeout(bahanTimer);
+// }
 
-// setInterval
+// // setInterval
 
-setInterval(() => {
-  const now = new Date();
-  const detik = now.getSeconds();
-  const menit = now.getMinutes();
-  const jam = now.getHours();
-  const fullJam = `${jam}:${menit}:${detik}`;
-  console.log(fullJam);
-}, 1000);
+// setInterval(() => {
+//   const now = new Date();
+//   const detik = now.getSeconds();
+//   const menit = now.getMinutes();
+//   const jam = now.getHours();
+//   const fullJam = `${jam}:${menit}:${detik}`;
+//   console.log(fullJam);
+// }, 1000);
