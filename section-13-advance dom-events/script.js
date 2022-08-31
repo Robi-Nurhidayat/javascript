@@ -59,3 +59,20 @@ document
   .addEventListener('click', function () {
     message.remove();
   });
+
+// styles
+
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+// untuk mendapatkan nilai dari css yang bukan inline css
+// atau untuk mengetahui nilai yang belum di definisan di css
+// kita gunakan fungsi getComputedStyle
+
+console.log(getComputedStyle(message).height);
+console.log(typeof getComputedStyle(message).height);
+
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px';
+
+console.log(getComputedStyle(message).height);
