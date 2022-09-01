@@ -89,29 +89,65 @@ document.documentElement.style.setProperty('--color-primary', 'lightblue');
 
 const logo = document.querySelector('.nav__logo');
 
-console.log(logo.alt);
-console.log(logo.className);
+// console.log(logo.alt);
+// console.log(logo.className);
 
-logo.alt = 'Logo Bankist';
+// logo.alt = 'Logo Bankist';
 
-// getAttribute -> untuk mengambil attribut yang ada di tag html
-console.log(logo.getAttribute('designer'));
+// // getAttribute -> untuk mengambil attribut yang ada di tag html
+// console.log(logo.getAttribute('designer'));
 
-// setAttribute -> untuk membuat attribut baru di tag html
+// // setAttribute -> untuk membuat attribut baru di tag html
 
-logo.setAttribute('company', 'Indonesia');
+// logo.setAttribute('company', 'Indonesia');
 
-console.log(logo.getAttribute('company'));
+// console.log(logo.getAttribute('company'));
 
-// data Attribute
-// khusus tag html yang didalam nya ada attribute dengan awalan kata data -> misal data-version-number atau data-pribadi
-// untuk mengakses nya kata depan nya diubah jadi dataset dan sisa kata nya menjadi camelcase -> misal  data-version-number = dataset.versionNumber
+// // data Attribute
+// // khusus tag html yang didalam nya ada attribute dengan awalan kata data -> misal data-version-number atau data-pribadi
+// // untuk mengakses nya kata depan nya diubah jadi dataset dan sisa kata nya menjadi camelcase -> misal  data-version-number = dataset.versionNumber
 
-console.log(logo.dataset.versionNumber);
+// console.log(logo.dataset.versionNumber);
 
-// classes
+// // classes
 
-logo.classList.add('c', 'd');
-logo.classList.remove('c', 'd');
-logo.classList.toggle('a');
-logo.classList.contains('d');
+// logo.classList.add('c', 'd');
+// logo.classList.remove('c', 'd');
+// logo.classList.toggle('a');
+// logo.classList.contains('d');
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+
+  console.log(
+    'Height/Width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // supaya ada animasi nya
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  // cara modern -> jika browser sudah support
+
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
