@@ -84,3 +84,21 @@ console.log(getComputedStyle(message).height);
 // untuk bisa mengubah warna tersebut kita bisa menggunakan documentElement
 
 document.documentElement.style.setProperty('--color-primary', 'lightblue');
+
+// Attributes
+
+const logo = document.querySelector('.nav__logo');
+
+console.log(logo.alt);
+console.log(logo.className);
+
+logo.alt = 'Logo Bankist';
+
+// getAttribute -> untuk mengambil attribut yang ada di tag html
+console.log(logo.getAttribute('designer'));
+
+// setAttribute -> untuk membuat attribut baru di tag html
+
+logo.setAttribute('company', 'Indonesia');
+
+console.log(logo.getAttribute('company'));
