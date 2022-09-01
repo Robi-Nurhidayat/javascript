@@ -102,3 +102,16 @@ console.log(logo.getAttribute('designer'));
 logo.setAttribute('company', 'Indonesia');
 
 console.log(logo.getAttribute('company'));
+
+// data Attribute
+// khusus tag html yang didalam nya ada attribute dengan awalan kata data -> misal data-version-number atau data-pribadi
+// untuk mengakses nya kata depan nya diubah jadi dataset dan sisa kata nya menjadi camelcase -> misal  data-version-number = dataset.versionNumber
+
+console.log(logo.dataset.versionNumber);
+
+// classes
+
+logo.classList.add('c', 'd');
+logo.classList.remove('c', 'd');
+logo.classList.toggle('a');
+logo.classList.contains('d');
