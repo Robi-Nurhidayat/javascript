@@ -76,3 +76,11 @@ message.style.height =
   Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px';
 
 console.log(getComputedStyle(message).height);
+
+// custom property
+// misal kita punya variabel di css
+// contoh :root{--primary-color: "red"}
+
+// untuk bisa mengubah warna tersebut kita bisa menggunakan documentElement
+
+document.documentElement.style.setProperty('--color-primary', 'lightblue');
