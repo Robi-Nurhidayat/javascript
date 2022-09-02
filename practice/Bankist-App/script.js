@@ -89,6 +89,30 @@ const displayMovements = function (acc) {
 
 displayMovements(account1.movements);
 
+const calcSummary = function (acc) {
+  const income = acc.filter(mov => mov > 0).reduce((acc, curr) => acc + curr);
+  const out = acc.filter(mov => mov < 0).reduce((acc, curr) => acc + curr);
+  const interest = acc
+    .filter(mov => mov >= 1000)
+    .reduce((acc, curr) => acc + curr);
+
+  labelSumIn.textContent = `${income}`;
+  labelSumOut.textContent = `${out}`;
+  labelSumInterest.textContent = `${interest}`;
+};
+
+calcSummary(account1.movements);
+
+const calcBalance = function (acc) {
+  acc.forEach(mov => {
+    mov.balance = mov.movements.reduce((acc, curr) => acc + curr);
+  });
+};
+
+calcBalance(accounts);
+
+console.log(accounts);
+
 containerApp.style.opacity = 100;
 
 // event handler
