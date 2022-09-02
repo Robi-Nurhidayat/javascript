@@ -122,17 +122,17 @@ const section1 = document.querySelector('#section--1');
 btnScrollTo.addEventListener('click', function (e) {
   const s1coords = section1.getBoundingClientRect();
 
-  console.log(s1coords);
+  // console.log(s1coords);
 
-  console.log(e.target.getBoundingClientRect());
+  // console.log(e.target.getBoundingClientRect());
 
-  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+  // console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
 
-  console.log(
-    'Height/Width viewport',
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
-  );
+  // console.log(
+  //   'Height/Width viewport',
+  //   document.documentElement.clientHeight,
+  //   document.documentElement.clientWidth
+  // );
 
   // Scrolling
   // window.scrollTo(
@@ -151,3 +151,18 @@ btnScrollTo.addEventListener('click', function (e) {
 
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+// more events
+
+const h1 = document.querySelector('h1');
+
+h1.addEventListener('mouseenter', function (e) {
+  alert('mouse enter to h1');
+});
+
+const alertH1 = function (e) {
+  alert('mouse enter to h1');
+};
+
+// kita bisa membatalkan addEventListener
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
