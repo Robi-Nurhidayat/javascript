@@ -130,6 +130,15 @@ btnLogin.addEventListener('click', function (e) {
   inputLoginPin.blur();
 });
 
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+  console.log(amount);
+
+  currentAccount.movements.push(amount);
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
