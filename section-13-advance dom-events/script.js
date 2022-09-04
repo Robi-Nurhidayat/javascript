@@ -89,6 +89,24 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 });
 
+// Tabbed component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+
+  // Guard clauses -> arti nya jika yang di klik bukan button
+  if (!clicked) return;
+
+  // hapus kelas operations__tab--active agar button yang ga di klik turun ke bawah
+
+  tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
+
+  clicked.classList.add('operations__tab--active');
+});
+
 // practice
 // const header = document.querySelector('.header');
 
