@@ -116,7 +116,6 @@ const updateUI = function (acc) {
 // event handler
 
 let currentAccount;
-containerApp.style.opacity = 100;
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
@@ -126,6 +125,19 @@ btnLogin.addEventListener('click', function (e) {
   );
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    const now = new Date();
+    const options = {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    };
+
+    const date = new Intl.DateTimeFormat(navigator.language, options).format(
+      now
+    );
+
+    labelDate.textContent = `${date}`;
+
     containerApp.style.opacity = 100;
     updateUI(currentAccount);
   }
