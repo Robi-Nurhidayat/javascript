@@ -168,6 +168,22 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const accountClose = accounts.findIndex(
+    acc => acc.username === currentAccount.username
+  );
+
+  if (
+    inputCloseUsername.value === currentAccount?.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    accounts.splice(accountClose, 1);
+    containerApp.style.opacity = 0;
+  }
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
