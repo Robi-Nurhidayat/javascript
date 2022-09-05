@@ -105,6 +105,16 @@ tabsContainer.addEventListener('click', function (e) {
   tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
 
   clicked.classList.add('operations__tab--active');
+
+  // active content area
+
+  tabsContent.forEach(tab =>
+    tab.classList.remove('operations__content--active')
+  );
+
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
 });
 
 // practice
@@ -207,31 +217,31 @@ tabsContainer.addEventListener('click', function (e) {
 // // setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 
 // DOM traversing
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
-// Going downwards: child
+// // Going downwards: child
 
-console.log(h1.querySelectorAll('.highlight'));
-console.log(h1.childNodes);
-console.log(h1.children);
-h1.firstElementChild.style.color = 'lightblue';
-h1.lastElementChild.style.color = 'red';
+// console.log(h1.querySelectorAll('.highlight'));
+// console.log(h1.childNodes);
+// console.log(h1.children);
+// h1.firstElementChild.style.color = 'lightblue';
+// h1.lastElementChild.style.color = 'red';
 
-// Going upwards: parent
-console.log(h1.parentNode);
-console.log(h1.parentElement);
+// // Going upwards: parent
+// console.log(h1.parentNode);
+// console.log(h1.parentElement);
 
-// h1.closest('.header').style.backgroundColor = 'salmon';
-h1.closest('h1').style.backgroundColor = 'salmon';
+// // h1.closest('.header').style.backgroundColor = 'salmon';
+// h1.closest('h1').style.backgroundColor = 'salmon';
 
-// Going sideways: siblings
+// // Going sideways: siblings
 
-console.log(h1.previousElementSibling);
-console.log(h1.nextElementSibling);
-console.log(h1.parentElement.children);
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);
+// console.log(h1.parentElement.children);
 
-[...h1.parentElement.children].forEach(el => {
-  console.log('el ' + el);
+// [...h1.parentElement.children].forEach(el => {
+//   console.log('el ' + el);
 
-  if (el !== h1) el.style.transform = 'scale(2)';
-});
+//   if (el !== h1) el.style.transform = 'scale(2)';
+// });
