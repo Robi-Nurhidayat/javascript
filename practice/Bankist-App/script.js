@@ -72,19 +72,36 @@ const getNewUsername = function (acc) {
 
 getNewUsername(accounts);
 
-const displayMovements = function (acc) {
-  acc.forEach((mov, i) => {
-    const type = mov > 0 ? 'withdrawal' : 'deposit';
-    const html = `
-    <div class="movements__row">
-          <div class="movements__type movements__type--${type}">${i} ${type}</div>
-          
-          <div class="movements__value">${mov}€</div>
-        </div>
-    `;
+const displayMovements = function (acc, sort = false) {
+  if (sort) {
+    acc
+      .sort((a, b) => a - b)
+      .forEach((mov, i) => {
+        const type = mov > 0 ? 'withdrawal' : 'deposit';
+        const html = `
+      <div class="movements__row">
+            <div class="movements__type movements__type--${type}">${i} ${type}</div>
+            
+            <div class="movements__value">${mov}€</div>
+          </div>
+      `;
 
-    containerMovements.insertAdjacentHTML('afterbegin', html);
-  });
+        containerMovements.insertAdjacentHTML('afterbegin', html);
+      });
+  } else {
+    acc.forEach((mov, i) => {
+      const type = mov > 0 ? 'withdrawal' : 'deposit';
+      const html = `
+      <div class="movements__row">
+            <div class="movements__type movements__type--${type}">${i} ${type}</div>
+            
+            <div class="movements__value">${mov}€</div>
+          </div>
+      `;
+
+      containerMovements.insertAdjacentHTML('afterbegin', html);
+    });
+  }
 };
 
 const calcSummary = function (acc) {
@@ -194,6 +211,12 @@ btnClose.addEventListener('click', function (e) {
     accounts.splice(accountClose, 1);
     containerApp.style.opacity = 0;
   }
+});
+
+let sort = false;
+btnSort.addEventListener('click', function () {
+  sort === false ? (sort = true) : (sort = false);
+  displayMovements(currentAccount.movements, sort);
 });
 
 /////////////////////////////////////////////////
