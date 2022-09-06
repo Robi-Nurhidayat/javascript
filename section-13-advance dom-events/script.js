@@ -170,7 +170,6 @@ const navHeight = nav.getBoundingClientRect().height;
 
 const headerCallbackObserver = function (entries) {
   const [entry] = entries;
-  console.log(entries);
 
   entry.isIntersecting
     ? nav.classList.remove('sticky')
@@ -185,6 +184,28 @@ const headerObserver = new IntersectionObserver(headerCallbackObserver, {
 
 headerObserver.observe(header);
 
+// Reveal Section -> menampilkan section
+
+const section = document.querySelectorAll('.section');
+const sectionCallback = function (entries, observer) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+
+  observer.unobserve(entry.target);
+};
+
+const sectionObserver = new IntersectionObserver(sectionCallback, {
+  root: null,
+  threshold: 0.15,
+});
+
+section.forEach(sec => {
+  sectionObserver.observe(sec);
+  sec.classList.add('section--hidden');
+});
 // practice
 // const header = document.querySelector('.header');
 
