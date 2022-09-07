@@ -53,3 +53,17 @@ btnScrollTo.addEventListener('click', function (e) {
 
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+/** Navigation smooth scrooling */
+
+const nav = document.querySelector('.nav__links');
+nav.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (e.target.classList.contains('nav__link')) {
+    const linkId = e.target.getAttribute('href');
+    document.querySelector(linkId).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // document.querySelector(`${id}`)
+  // yang harus dilakukan sesuai id hrs smooth scroll
+});
