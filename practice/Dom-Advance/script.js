@@ -63,7 +63,26 @@ nav.addEventListener('click', function (e) {
     const linkId = e.target.getAttribute('href');
     document.querySelector(linkId).scrollIntoView({ behavior: 'smooth' });
   }
+});
 
-  // document.querySelector(`${id}`)
-  // yang harus dilakukan sesuai id hrs smooth scroll
+// Tabbed content
+
+const tabContainer = document.querySelector('.operations__tab-container');
+const tabbed = document.querySelectorAll('.operations__tab');
+const tabbedContent = document.querySelectorAll('.operations__content');
+
+tabContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+  if (!clicked) return;
+
+  tabbed.forEach(tab => tab.classList.remove('operations__tab--active'));
+  tabbedContent.forEach(tab =>
+    tab.classList.remove('operations__content--active')
+  );
+
+  clicked.classList.add('operations__tab--active');
+
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
 });
