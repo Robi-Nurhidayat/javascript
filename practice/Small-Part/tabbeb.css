@@ -1,0 +1,19 @@
+.container {
+  max-width: 500px;
+  border: 1px solid lightblue;
+  padding: 10px;
+  margin: auto;
+}
+
+.tabbed__header {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.btn {
+  border: none;
+  background-color: lightblue;
+  color: #fff;
+  padding: 8px 14px;
+}
