@@ -236,12 +236,10 @@ imgTargets.forEach(img => imgOberver.observe(img));
 
 // slider
 
-const slider = document.querySelector('.slider');
-slider.style.transform = 'scale(0.4) translateX(-800px)';
-slider.style.everflow = 'visible';
 const slides = document.querySelectorAll('.slide');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
+const dotContainer = document.querySelector('.dots');
 
 let currSlide = 0;
 const maxSlide = slides.length;
@@ -249,6 +247,8 @@ const maxSlide = slides.length;
 slides.forEach(function (s, i) {
   return (s.style.transform = `translateX(${100 * i}%)`);
 });
+
+// create semua button untuk kelas dot container
 
 const goToSlide = function (currSlide) {
   slides.forEach(function (s, i) {
@@ -276,6 +276,21 @@ const prevSlide = function () {
   goToSlide(currSlide);
 };
 btnLeft.addEventListener('click', prevSlide);
+
+// menggunakan panah di keyboard
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowRight') {
+    nextSlide();
+  }
+  e.key === 'ArrowLeft' && prevSlide();
+});
+
+dotContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('dots_dot')) {
+    console.log('DIT');
+  }
+});
 
 // practice
 // const header = document.querySelector('.header');
