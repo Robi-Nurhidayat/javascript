@@ -11,7 +11,7 @@
   <body>
     <div class="container">
       <h1 class="heading__login">Login</h1>
-      <form action="#">
+      <form>
         <div class="form__group">
           <label for="username">Username</label>
           <input
@@ -20,6 +20,10 @@
             class="input__username"
             placeholder="robinurhidayat"
           />
+          <div class="error__message">
+            <span class="error__username"></span>
+            <span class="icon__username"></span>
+          </div>
         </div>
         <div class="form__group">
           <label for="password">Password</label>
@@ -29,8 +33,12 @@
             placeholder="Password"
             id="password"
           />
+          <div class="error__message">
+            <span class="error__password"></span>
+            <span class="icon__password"></span>
+          </div>
         </div>
-        <button class="btn">Submit</button>
+        <button type="submit" class="btn">Submit</button>
       </form>
     </div>
   </body>
