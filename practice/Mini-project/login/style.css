@@ -28,24 +28,49 @@ body {
 label {
   color: #fff;
   margin-bottom: 5px;
-  display: block;
+  display: inline-block;
   font-size: 10px;
+  width: 100%;
 }
 
 input {
-  display: block;
+  display: inline-block;
   margin-bottom: 5px;
   background-color: transparent;
   border: none;
   font-size: 14px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.842);
   color: #fff;
+  padding: 5px 8px;
+  transition: all 0.1s;
+  width: 100%;
+  height: 30px;
 }
 
 input::placeholder {
   color: #fff;
 }
 
+input:focus {
+  /* border: 1px solid red; */
+  outline: none;
+  box-shadow: 0px 1px 0px #fff;
+  font-size: 12px;
+  border: none;
+}
+
 .opacity {
   opacity: 0;
+}
+
+.btn {
+  border: none;
+  background-color: transparent;
+  padding: 5px 8px;
+  margin-top: 10px;
+  background-color: #78dec7;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 3px;
+  cursor: pointer;
 }
