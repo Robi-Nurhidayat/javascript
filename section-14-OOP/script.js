@@ -108,6 +108,10 @@ class Animal {
   get name() {
     return this._name;
   }
+
+  static hey() {
+    console.log('ini adalah static, static tidak diwarisi pada instance');
+  }
 }
 
 const cat = new Animal('cat', 30);
