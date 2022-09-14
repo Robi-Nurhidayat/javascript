@@ -86,3 +86,32 @@ const asep = new PersonCl('Asep', 1999);
 console.log(asep);
 asep.calcAge();
 asep.sayHello();
+
+/** GETTER AND SETTER ============================================================================ */
+class Animal {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  // setter and getter,
+  // usually use prefix set and get
+
+  set name(name) {
+    if (name.includes(' ')) {
+      this._name = name;
+    } else {
+      alert('Name not include space ');
+    }
+  }
+
+  get name() {
+    return this._name;
+  }
+}
+
+const cat = new Animal('cat', 30);
+cat.name = 'cat as';
+console.log(cat.name);
+
+console.log(cat);
