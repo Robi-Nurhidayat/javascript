@@ -33,7 +33,7 @@
 // // console.log(Array.unique());
 // console.log(Array.prototype.unique());
 
-/** Challenge 1 */
+/** Challenge 1 =========================================================================== */
 const Car = function (merk, speed) {
   this.merk = merk;
   this.speed = speed;
@@ -61,3 +61,28 @@ console.log(car2.merk);
 console.log(car2.speed);
 console.log(car2.accelerate());
 console.log(car2.brake());
+
+/** ES6 CLASSES =================================================================== */
+
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // metode
+  // metode di bawah adalah function expression -> calcAge = function( ){}
+  calcAge() {
+    console.log(2023 - this.birthYear);
+  }
+
+  sayHello = function () {
+    console.log(`Hello ${this.firstName}`);
+  };
+}
+
+const asep = new PersonCl('Asep', 1999);
+
+console.log(asep);
+asep.calcAge();
+asep.sayHello();
