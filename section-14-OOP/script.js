@@ -88,34 +88,53 @@ asep.calcAge();
 asep.sayHello();
 
 /** GETTER AND SETTER ============================================================================ */
-class Animal {
-  constructor(name, age) {
+// class Animal {
+//   constructor(name, age) {
+//     this.name = name;
+//     this.age = age;
+//   }
+
+//   // setter and getter,
+//   // usually use prefix set and get
+
+//   set name(name) {
+//     if (name.includes(' ')) {
+//       this._name = name;
+//     } else {
+//       alert('Name not include space ');
+//     }
+//   }
+
+//   get name() {
+//     return this._name;
+//   }
+
+//   static hey() {
+//     console.log('ini adalah static, static tidak diwarisi pada instance');
+//   }
+// }
+
+// const cat = new Animal('cat', 30);
+// cat.name = 'cat as';
+// console.log(cat.name);
+
+// console.log(cat);
+
+/** OBJECT.CREATE */
+
+const ObjectCreate = {
+  init(name, birthYear) {
     this.name = name;
-    this.age = age;
-  }
+    this.birthYear = birthYear;
+  },
 
-  // setter and getter,
-  // usually use prefix set and get
+  calcAge() {
+    console.log(`age is ${2022 - this.birthYear}`);
+  },
+};
 
-  set name(name) {
-    if (name.includes(' ')) {
-      this._name = name;
-    } else {
-      alert('Name not include space ');
-    }
-  }
+const adi = Object.create(ObjectCreate);
 
-  get name() {
-    return this._name;
-  }
+adi.init('Adi', 1999);
 
-  static hey() {
-    console.log('ini adalah static, static tidak diwarisi pada instance');
-  }
-}
-
-const cat = new Animal('cat', 30);
-cat.name = 'cat as';
-console.log(cat.name);
-
-console.log(cat);
+adi.calcAge();
