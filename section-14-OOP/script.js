@@ -64,28 +64,28 @@ console.log(car2.brake());
 
 /** ES6 CLASSES =================================================================== */
 
-class PersonCl {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  }
+// class PersonCl {
+//   constructor(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   }
 
-  // metode
-  // metode di bawah adalah function expression -> calcAge = function( ){}
-  calcAge() {
-    console.log(2023 - this.birthYear);
-  }
+//   // metode
+//   // metode di bawah adalah function expression -> calcAge = function( ){}
+//   calcAge() {
+//     console.log(2023 - this.birthYear);
+//   }
 
-  sayHello = function () {
-    console.log(`Hello ${this.firstName}`);
-  };
-}
+//   sayHello = function () {
+//     console.log(`Hello ${this.firstName}`);
+//   };
+// }
 
-const asep = new PersonCl('Asep', 1999);
+// const asep = new PersonCl('Asep', 1999);
 
-console.log(asep);
-asep.calcAge();
-asep.sayHello();
+// console.log(asep);
+// asep.calcAge();
+// asep.sayHello();
 
 /** GETTER AND SETTER ============================================================================ */
 // class Animal {
@@ -122,19 +122,86 @@ asep.sayHello();
 
 /** OBJECT.CREATE */
 
-const ObjectCreate = {
-  init(name, birthYear) {
-    this.name = name;
-    this.birthYear = birthYear;
-  },
+// const ObjectCreate = {
+//   init(name, birthYear) {
+//     this.name = name;
+//     this.birthYear = birthYear;
+//   },
 
-  calcAge() {
-    console.log(`age is ${2022 - this.birthYear}`);
-  },
+//   calcAge() {
+//     console.log(`age is ${2022 - this.birthYear}`);
+//   },
+// };
+
+// const adi = Object.create(ObjectCreate);
+
+// adi.init('Adi', 1999);
+
+// adi.calcAge();
+
+// Challenge 2
+
+class Car2 {
+  constructor(merk, speed) {
+    this.merk = merk;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    return (this._speed += 10);
+  }
+
+  brake() {
+    return (this._speed -= 5);
+  }
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+}
+
+const mustang = new Car2('Mustang', 120);
+
+// console.log(mustang.accelerate());
+
+console.log(mustang.speedUS);
+mustang.speedUS = 50;
+console.log(mustang);
+
+const Person = function (firstName, birtYear) {
+  this.firstName = firstName;
+  this.birtYear = birtYear;
 };
 
-const adi = Object.create(ObjectCreate);
+Person.prototype.calcAge = function () {
+  console.log(2022 - this.birtYear);
+};
 
-adi.init('Adi', 1999);
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+Student.prototype = Object.create(Person.prototype);
 
-adi.calcAge();
+Student.prototype.takeCourse = function () {
+  console.log(`I take course ${this.course} with instructor is jonas`);
+};
+
+const aji = new Student('aji', 1999, 'Java');
+
+console.log(aji);
+
+aji.calcAge();
+
+console.log(aji.__proto__);
+console.log(aji.__proto__.__proto__);
+console.log(aji.prototype);
+
+console.log(aji instanceof Person);
+console.log(aji instanceof Student);
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
