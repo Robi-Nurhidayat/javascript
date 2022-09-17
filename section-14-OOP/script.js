@@ -208,50 +208,105 @@
 
 /**Challenge 3 */
 
-const Car = function (merk, speed) {
-  this.merk = merk;
-  this.speed = speed;
+// const Car = function (merk, speed) {
+//   this.merk = merk;
+//   this.speed = speed;
+// };
+
+// Car.prototype.accelerate = function () {
+//   this.speed = this.speed + 10;
+
+//   console.log(`Tesla going at ${this.speed} km/h`);
+// };
+
+// Car.prototype.brake = function () {
+//   this.speed = this.speed - 20;
+//   this.charge = this.charge + 1;
+
+//   console.log(
+//     `Tesla going at ${this.speed} km/h, with a charge of ${this.charge}`
+//   );
+// };
+
+// const Ev = function (merk, speed, charge) {
+//   Car.call(this, merk, speed);
+//   this.charge = charge;
+// };
+
+// Ev.prototype = Object.create(Car.prototype);
+// Ev.prototype.accelerate = function () {
+//   this.speed = this.speed + 20;
+//   this.charge = this.charge - 1;
+
+//   console.log(
+//     `Tesla going at ${this.speed} km/h, with a charge of ${this.charge}`
+//   );
+// };
+// Ev.prototype.chargeBattery = function (chargeTo) {
+//   this.charge = chargeTo;
+// };
+
+// const tesla = new Ev('Tesla', 120, 23);
+
+// console.log(tesla);
+
+// tesla.accelerate();
+// tesla.brake();
+// tesla.chargeBattery(90);
+// tesla.accelerate();
+// tesla.brake();
+
+/** ES6 inheritance ======================================================== */
+// class Animal {
+//   constructor(nama, birthYear) {
+//     this.nama = nama;
+//     this.birthYear = birthYear;
+//   }
+
+//   calcAge() {
+//     console.log(`is animal ${2030 - this.birthYear}`);
+//   }
+// }
+
+// class Cat extends Animal {
+//   constructor(nama, birthYear, color) {
+//     super(nama, birthYear);
+//     this.color = color;
+//   }
+// }
+
+// const kucing = new Cat('Kucing', 1999, 'blue');
+
+// console.log(kucing);
+// kucing.calcAge();
+
+/** Object.create inharitance ================================================ */
+
+const Food = {
+  calcPrice: function () {
+    console.log(`harga ${this.harga * this.jumlah}`);
+  },
+
+  init(nama, harga, jumlah) {
+    this.nama = nama;
+    this.harga = harga;
+    this.jumlah = jumlah;
+  },
 };
 
-Car.prototype.accelerate = function () {
-  this.speed = this.speed + 10;
-
-  console.log(`Tesla going at ${this.speed} km/h`);
+const Makanan = Object.create(Food);
+Makanan.init = function (nama, harga, jumlah, stok) {
+  Food.init.call(this, nama, harga, jumlah);
+  this.stok = stok;
 };
 
-Car.prototype.brake = function () {
-  this.speed = this.speed - 20;
-  this.charge = this.charge + 1;
-
-  console.log(
-    `Tesla going at ${this.speed} km/h, with a charge of ${this.charge}`
-  );
+Makanan.intoduce = function () {
+  console.log('hai aku makanan');
 };
 
-const Ev = function (merk, speed, charge) {
-  Car.call(this, merk, speed);
-  this.charge = charge;
-};
+const ciki = Object.create(Makanan);
 
-Ev.prototype = Object.create(Car.prototype);
-Ev.prototype.accelerate = function () {
-  this.speed = this.speed + 20;
-  this.charge = this.charge - 1;
-
-  console.log(
-    `Tesla going at ${this.speed} km/h, with a charge of ${this.charge}`
-  );
-};
-Ev.prototype.chargeBattery = function (chargeTo) {
-  this.charge = chargeTo;
-};
-
-const tesla = new Ev('Tesla', 120, 23);
-
-console.log(tesla);
-
-tesla.accelerate();
-tesla.brake();
-tesla.chargeBattery(90);
-tesla.accelerate();
-tesla.brake();
+ciki.init('ciki', 2000, 2, 100);
+ciki.calcPrice();
+console.log(ciki);
+ciki.intoduce();
