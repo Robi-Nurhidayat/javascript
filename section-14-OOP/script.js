@@ -317,16 +317,20 @@ class Accounts {
   constructor(owner, pin) {
     this.owner = owner;
     this.pin = pin;
-    this.movements = [];
+    this._movements = [];
     this.locale = navigator.language;
   }
 
+  // protected menggunakan _ -> _nama
+  _getMovements() {
+    return this._movements;
+  }
   deposit(val) {
-    this.movements.push(val);
+    this._movements.push(val);
   }
 
   withdraw(val) {
-    this.movements.push(-val);
+    this._movements.push(-val);
   }
 
   approveLoad(val) {
@@ -351,3 +355,5 @@ acc1.approveLoad(1000);
 acc1.requestLoad(2000);
 
 console.log(acc1);
+
+console.log(acc1._getMovements());
