@@ -282,31 +282,72 @@
 
 /** Object.create inharitance ================================================ */
 
-const Food = {
-  calcPrice: function () {
-    console.log(`harga ${this.harga * this.jumlah}`);
-  },
+// const Food = {
+//   calcPrice: function () {
+//     console.log(`harga ${this.harga * this.jumlah}`);
+//   },
 
-  init(nama, harga, jumlah) {
-    this.nama = nama;
-    this.harga = harga;
-    this.jumlah = jumlah;
-  },
-};
+//   init(nama, harga, jumlah) {
+//     this.nama = nama;
+//     this.harga = harga;
+//     this.jumlah = jumlah;
+//   },
+// };
 
-const Makanan = Object.create(Food);
-Makanan.init = function (nama, harga, jumlah, stok) {
-  Food.init.call(this, nama, harga, jumlah);
-  this.stok = stok;
-};
+// const Makanan = Object.create(Food);
+// Makanan.init = function (nama, harga, jumlah, stok) {
+//   Food.init.call(this, nama, harga, jumlah);
+//   this.stok = stok;
+// };
 
-Makanan.intoduce = function () {
-  console.log('hai aku makanan');
-};
+// Makanan.intoduce = function () {
+//   console.log('hai aku makanan');
+// };
 
-const ciki = Object.create(Makanan);
+// const ciki = Object.create(Makanan);
 
-ciki.init('ciki', 2000, 2, 100);
-ciki.calcPrice();
-console.log(ciki);
-ciki.intoduce();
+// ciki.init('ciki', 2000, 2, 100);
+// ciki.calcPrice();
+// console.log(ciki);
+// ciki.intoduce();
+
+/** Another example classes */
+
+class Accounts {
+  constructor(owner, pin) {
+    this.owner = owner;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+  }
+
+  deposit(val) {
+    this.movements.push(val);
+  }
+
+  withdraw(val) {
+    this.movements.push(-val);
+  }
+
+  approveLoad(val) {
+    return true;
+  }
+
+  requestLoad(val) {
+    if (this.approveLoad(val)) {
+      this.deposit(val);
+      console.log('Saldo bertambah');
+    }
+  }
+}
+
+const acc1 = new Accounts('robi', 1111);
+acc1.deposit(1000);
+acc1.withdraw(500);
+
+console.log(acc1);
+
+acc1.approveLoad(1000);
+acc1.requestLoad(2000);
+
+console.log(acc1);
