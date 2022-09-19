@@ -313,64 +313,137 @@
 
 /** Another example classes */
 
-class Accounts {
-  // mendefinisikan field atau variable di dalam kelas tidak menggunakan keyword const,let atau var
-  // 1). Public field
-  locale = navigator.language;
-  // Private field
-  #movements = [];
-  #pin;
-  constructor(owner, pin) {
-    this.owner = owner;
-    this.#pin = pin;
+// class Accounts {
+//   // mendefinisikan field atau variable di dalam kelas tidak menggunakan keyword const,let atau var
+//   // 1). Public field
+//   locale = navigator.language;
+//   // Private field
+//   #movements = [];
+//   #pin;
+//   constructor(owner, pin) {
+//     this.owner = owner;
+//     this.#pin = pin;
+//   }
+
+//   // protected menggunakan _ -> _nama
+//   _getMovements() {
+//     return this.#movements;
+//   }
+//   deposit(val) {
+//     this.#movements.push(val);
+//     return this;
+//   }
+
+//   withdraw(val) {
+//     this.#movements.push(-val);
+//   }
+
+//   approveLoad(val) {
+//     return true;
+//   }
+
+//   requestLoad(val) {
+//     if (this.approveLoad(val)) {
+//       this.deposit(val);
+//       console.log('Saldo bertambah');
+//     }
+//   }
+
+//   // private metode
+
+//   #showPin() {
+//     console.log('pin your is 111');
+//   }
+
+//   static test() {
+//     console.log('contoh keyword static');
+//   }
+// }
+
+// const acc1 = new Accounts('robi', 1111);
+// acc1.deposit(1000);
+// acc1.withdraw(500);
+
+// console.log(acc1);
+
+// acc1.approveLoad(1000);
+// acc1.requestLoad(2000);
+
+// console.log(acc1);
+
+// console.log(acc1._getMovements());
+// // console.log(acc1.#movements);
+// // console.log(acc1.#pin);
+// // console.log(acc1.#showPin());
+
+// // Chaining
+// // untuk bisa melakukan chaining harus mereturn this pada metode tersebuut
+// acc1.deposit(200).deposit(200);
+
+// console.log();
+
+// console.log(acc1);
+
+// Challenge 4 ============================================================
+
+class Car {
+  constructor(merk, speed) {
+    this.merk = merk;
+    this.speed = speed;
   }
 
-  // protected menggunakan _ -> _nama
-  _getMovements() {
-    return this.#movements;
-  }
-  deposit(val) {
-    this.#movements.push(val);
-  }
+  accelerate() {
+    this.speed = this.speed + 10;
 
-  withdraw(val) {
-    this.#movements.push(-val);
+    console.log(`Tesla going at ${this.speed} km/h`);
+    return this;
   }
 
-  approveLoad(val) {
-    return true;
-  }
+  brake() {
+    this.speed = this.speed - 20;
+    this.charge = this.charge + 1;
 
-  requestLoad(val) {
-    if (this.approveLoad(val)) {
-      this.deposit(val);
-      console.log('Saldo bertambah');
-    }
-  }
+    console.log(
+      `Tesla going at ${this.speed} km/h, with a charge of ${this.charge}`
+    );
 
-  // private metode
-
-  #showPin() {
-    console.log('pin your is 111');
-  }
-
-  static test() {
-    console.log('contoh keyword static');
+    return this;
   }
 }
 
-const acc1 = new Accounts('robi', 1111);
-acc1.deposit(1000);
-acc1.withdraw(500);
+class Ev extends Car {
+  constructor(merk, speed, charge) {
+    super(merk, speed);
+    this.charge = charge;
+  }
 
-console.log(acc1);
+  accelerate() {
+    this.speed = this.speed + 20;
+    this.charge = this.charge - 1;
 
-acc1.approveLoad(1000);
-acc1.requestLoad(2000);
+    console.log(
+      `Tesla going at ${this.speed} km/h, with a charge of ${this.charge}`
+    );
+    return this;
+  }
 
-console.log(acc1);
+  chargeBattery(chargeTo) {
+    this.charge = chargeTo;
+    return this;
+  }
+}
 
-console.log(acc1._getMovements());
-// console.log(acc1.#movements);
-console.log(acc1.#pin);
-console.log(acc1.#showPin());
+const tesla = new Ev('Tesla', 120, 23);
+
+console.log(tesla);
+
+tesla.accelerate();
+tesla.brake();
+tesla.chargeBattery(90);
+tesla.accelerate();
+tesla.brake();
+
+console.log(tesla);
+tesla.accelerate().accelerate().brake().chargeBattery(100).chargeBattery(10);
+
+console.log(tesla);
