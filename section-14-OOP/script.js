@@ -314,23 +314,27 @@
 /** Another example classes */
 
 class Accounts {
+  // mendefinisikan field atau variable di dalam kelas tidak menggunakan keyword const,let atau var
+  // 1). Public field
+  locale = navigator.language;
+  // Private field
+  #movements = [];
+  #pin;
   constructor(owner, pin) {
     this.owner = owner;
-    this.pin = pin;
-    this._movements = [];
-    this.locale = navigator.language;
+    this.#pin = pin;
   }
 
   // protected menggunakan _ -> _nama
   _getMovements() {
-    return this._movements;
+    return this.#movements;
   }
   deposit(val) {
-    this._movements.push(val);
+    this.#movements.push(val);
   }
 
   withdraw(val) {
-    this._movements.push(-val);
+    this.#movements.push(-val);
   }
 
   approveLoad(val) {
@@ -342,6 +346,16 @@ class Accounts {
       this.deposit(val);
       console.log('Saldo bertambah');
     }
+  }
+
+  // private metode
+
+  #showPin() {
+    console.log('pin your is 111');
+  }
+
+  static test() {
+    console.log('contoh keyword static');
   }
 }
 
@@ -357,3 +371,6 @@ acc1.requestLoad(2000);
 console.log(acc1);
 
 console.log(acc1._getMovements());
+// console.log(acc1.#movements);
+console.log(acc1.#pin);
+console.log(acc1.#showPin());
