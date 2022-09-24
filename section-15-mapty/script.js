@@ -149,10 +149,10 @@ class App {
       console.log(elevation);
 
       if (
-        !validInputs(distance, duration, elevation) ||
-        distance > 0 ||
-        duration > 0 ||
-        elevation > 0
+        !validInputs(distance, duration, elevation)
+        // distance > 0 ||
+        // duration > 0 ||
+        // elevation > 0
       ) {
         return alert('Inputs have to be positive numbers');
       }
