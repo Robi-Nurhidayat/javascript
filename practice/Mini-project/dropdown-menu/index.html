@@ -4,29 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dropdown Menu</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
-      rel="stylesheet"
-    />
+    <title>Latihan menu dropdown</title>
     <link rel="stylesheet" href="style.css" />
+    <script defer src="index.js"></script>
   </head>
   <body>
-    <div class="container container--dropdown">
-      <div class="dropdown--current">
-        <span>Facebook</span
-        ><ion-icon
-          name="caret-down-outline"
-          class="icon icon-rotate"
-        ></ion-icon>
+    <div class="container">
+      <div class="current--menu">
+        Facebook
+        <ion-icon name="caret-down-outline" class="icon"></ion-icon>
       </div>
 
-      <div class="dropdown--items">
-        <div class="dropdown--item">Twitter</div>
-        <div class="dropdown--item">Instagram</div>
-        <div class="dropdown--item">Tik Tok</div>
+      <div class="list__menu hidden">
+        <span>Instagram</span>
+        <span>Twitter</span>
       </div>
     </div>
 
