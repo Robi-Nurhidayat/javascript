@@ -5,10 +5,38 @@ const countriesContainer = document.querySelector('.countries');
 
 ///////////////////////////////////////
 
-const request = new XMLHttpRequest();
-request.open('GET', 'https://restcountries.com/v3.1/name/indonesia');
-request.send();
+const getCountryNeighbor = function (data) {
+  const html = `
+  <article class="country">
+    <img class="country__img" src="${data.coatOfArms.png}" />
+    <div class="country__data">
+      <h3 class="country__name">${data.name.official}</h3>
+      <h4 class="country__region">${data.region}</h4>
+      <p class="country__row"><span>👫</span>${data.population}</p>
+      <p class="country__row"><span>🗣️</span>${data.languages.ind}</p>
+      <p class="country__row"><span>💰</span>${data.currencies.IDR.symbol}</p>
+    </div>
+  </article>
+`;
 
-request.addEventListener('load', function () {
-  console.log(this.responseText);
-});
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.style.opacity = 1;
+};
+
+const getCountry = contry => {
+  const request = new XMLHttpRequest();
+  request.open('GET', `https://restcountries.com/v3.1/name/${contry}`);
+  request.send();
+
+  request.addEventListener('load', function () {
+    console.log(this.responseText);
+
+    const [data] = JSON.parse(this.responseText);
+    console.log(data);
+    getCountryNeighbor(data);
+  });
+};
+
+getCountry('indonesia');
+
+getCountry('indonesia');
