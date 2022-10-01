@@ -23,20 +23,31 @@ const getCountryNeighbor = function (data) {
   countriesContainer.style.opacity = 1;
 };
 
-const getCountry = contry => {
-  const request = new XMLHttpRequest();
-  request.open('GET', `https://restcountries.com/v3.1/name/${contry}`);
-  request.send();
+// const getCountry = contry => {
+//   const request = new XMLHttpRequest();
+//   request.open('GET', `https://restcountries.com/v3.1/name/${contry}`);
+//   request.send();
 
-  request.addEventListener('load', function () {
-    console.log(this.responseText);
+//   request.addEventListener('load', function () {
+//     console.log(this.responseText);
 
-    const [data] = JSON.parse(this.responseText);
-    console.log(data);
-    getCountryNeighbor(data);
-  });
+//     const [data] = JSON.parse(this.responseText);
+//     console.log(data);
+//     getCountryNeighbor(data);
+//   });
+// };
+
+// getCountry('indonesia');
+
+// getCountry('indonesia');
+
+const getCountry = function (country) {
+  fetch(`https:restcountries.com/v3.1/name/${country}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      getCountryNeighbor(data[0]);
+    });
 };
-
-getCountry('indonesia');
 
 getCountry('indonesia');
