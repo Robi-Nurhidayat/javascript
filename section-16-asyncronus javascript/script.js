@@ -47,7 +47,11 @@ const getCountry = function (country) {
     .then(data => {
       console.log(data);
       getCountryNeighbor(data[0]);
-    });
+
+      return fetch(`https:restcountries.com/v3.1/name/${country}`);
+    })
+    .then(response => response.json())
+    .then(data => getCountryNeighbor(data[0], 'neighbor'));
 };
 
 getCountry('indonesia');
