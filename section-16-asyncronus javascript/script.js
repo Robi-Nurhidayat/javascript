@@ -20,7 +20,7 @@ const getCountryNeighbor = function (data) {
 `;
 
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
+  // countriesContainer.style.opacity = 1;
 };
 
 // const getCountry = contry => {
@@ -41,6 +41,11 @@ const getCountryNeighbor = function (data) {
 
 // getCountry('indonesia');
 
+const renderError = function (msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  // countriesContainer.style.opacity = 1;
+};
+
 const getCountry = function (country) {
   fetch(`https:restcountries.com/v3.1/name/${country}`)
     .then(response => response.json())
@@ -51,7 +56,16 @@ const getCountry = function (country) {
       return fetch(`https:restcountries.com/v3.1/name/${country}`);
     })
     .then(response => response.json())
-    .then(data => getCountryNeighbor(data[0], 'neighbor'));
+    .then(data => getCountryNeighbor(data[0], 'neighbor'))
+    .catch(err => {
+      console.log(err);
+      renderError(`Gagal memuat ${err.message}`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
 };
 
-getCountry('indonesia');
+btn.addEventListener('click', function () {
+  getCountry('indonesia');
+});
