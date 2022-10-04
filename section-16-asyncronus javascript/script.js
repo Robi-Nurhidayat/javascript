@@ -48,7 +48,12 @@ const renderError = function (msg) {
 
 const getCountry = function (country) {
   fetch(`https:restcountries.com/v3.1/name/${country}`)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`country not found status ${response.status}`);
+      }
+      return response.json();
+    })
     .then(data => {
       console.log(data);
       getCountryNeighbor(data[0]);
@@ -69,3 +74,5 @@ const getCountry = function (country) {
 btn.addEventListener('click', function () {
   getCountry('indonesia');
 });
+
+getCountry('asdasd');
