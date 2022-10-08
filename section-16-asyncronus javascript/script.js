@@ -111,19 +111,40 @@ btn.addEventListener('click', function () {
   whereAmI(-6.9351854, 107.6002968);
 });
 
-console.log('test start');
+// console.log('test start');
 
-setTimeout(() => {
-  console.log('executing after 0 second');
-}, 0);
+// setTimeout(() => {
+//   console.log('executing after 0 second');
+// }, 0);
 
-Promise.resolve('Promise 1').then(res => {
-  console.log(res);
+// Promise.resolve('Promise 1').then(res => {
+//   console.log(res);
+// });
+
+// Promise.resolve('Promise 2').then(res => {
+//   for (let i = 0; i < 1000; i++) {}
+//   console.log(res);
+// });
+
+// console.log('test end');
+
+// / Building simple promise
+
+const lottrePromise = new Promise(function (resolve, reject) {
+  console.log('Lottre di mulai');
+  setTimeout(() => {
+    if (Math.random() >= 0.5) {
+      resolve('You win');
+    } else {
+      reject(new Error('You lost'));
+    }
+  }, 2000);
 });
 
-Promise.resolve('Promise 2').then(res => {
-  for (let i = 0; i < 1000; i++) {}
-  console.log(res);
-});
-
-console.log('test end');
+lottrePromise
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => {
+    console.log(err);
+  });
