@@ -110,3 +110,20 @@ const whereAmI = function (lat, lng) {
 btn.addEventListener('click', function () {
   whereAmI(-6.9351854, 107.6002968);
 });
+
+console.log('test start');
+
+setTimeout(() => {
+  console.log('executing after 0 second');
+}, 0);
+
+Promise.resolve('Promise 1').then(res => {
+  console.log(res);
+});
+
+Promise.resolve('Promise 2').then(res => {
+  for (let i = 0; i < 1000; i++) {}
+  console.log(res);
+});
+
+console.log('test end');
