@@ -130,21 +130,43 @@ btn.addEventListener('click', function () {
 
 // / Building simple promise
 
-const lottrePromise = new Promise(function (resolve, reject) {
-  console.log('Lottre di mulai');
-  setTimeout(() => {
-    if (Math.random() >= 0.5) {
-      resolve('You win');
-    } else {
-      reject(new Error('You lost'));
-    }
-  }, 2000);
-});
+// const lottrePromise = new Promise(function (resolve, reject) {
+//   console.log('Lottre di mulai');
+//   setTimeout(() => {
+//     if (Math.random() >= 0.5) {
+//       resolve('You win');
+//     } else {
+//       reject(new Error('You lost'));
+//     }
+//   }, 2000);
+// });
 
-lottrePromise
-  .then(res => {
-    console.log(res);
+// lottrePromise
+//   .then(res => {
+//     console.log(res);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+
+// promisfying promise
+
+const wait = function (second) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, second * 1000);
+  });
+};
+
+wait(1)
+  .then(() => {
+    console.log('Wait 1 second');
+
+    return wait(1);
   })
-  .catch(err => {
-    console.log(err);
+  .then(() => {
+    console.log('wait 2 second');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('wait 3 second');
   });
