@@ -79,37 +79,37 @@ const getCountryNeighbor = function (data) {
 
 // Challenge 1
 
-const whereAmI = function (lat, lng) {
-  fetch(
-    `https://geocode.xyz/${lat},${lng},14z?geoit=json&auth=3591584854395899404x59258`
-  )
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`err ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      return fetch(`https:restcountries.com/v3.1/name/${data.country}`);
-    })
-    .then(res => {
-      return res.json();
-    })
-    .then(data => {
-      console.log(data);
-      getCountryNeighbor(data[0]);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-    .finally(() => {
-      countriesContainer.style.opacity = 1;
-    });
-};
+// const whereAmI = function (lat, lng) {
+//   fetch(
+//     `https://geocode.xyz/${lat},${lng},14z?geoit=json&auth=3591584854395899404x59258`
+//   )
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error(`err ${response.status}`);
+//       }
+//       return response.json();
+//     })
+//     .then(data => {
+//       return fetch(`https:restcountries.com/v3.1/name/${data.country}`);
+//     })
+//     .then(res => {
+//       return res.json();
+//     })
+//     .then(data => {
+//       console.log(data);
+//       getCountryNeighbor(data[0]);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
 
-btn.addEventListener('click', function () {
-  whereAmI(-6.9351854, 107.6002968);
-});
+// btn.addEventListener('click', function () {
+//   whereAmI(-6.9351854, 107.6002968);
+// });
 
 // console.log('test start');
 
@@ -170,3 +170,47 @@ wait(1)
   .then(() => {
     console.log('wait 3 second');
   });
+
+const whereAmI = function (lat, lng) {
+  getPosition()
+    .then(pos => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+      return fetch(
+        `https://geocode.xyz/${lat},${lng},14z?geoit=json&auth=3591584854395899404x59258`
+      );
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`err ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      return fetch(`https:restcountries.com/v3.1/name/${data.country}`);
+    })
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      console.log(data);
+      getCountryNeighbor(data[0]);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+getPosition()
+  .then(pos => console.log(pos))
+  .catch(err => console.error(err));
+
+btn.addEventListener('click', whereAmI);
