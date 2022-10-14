@@ -171,46 +171,79 @@ wait(1)
     console.log('wait 3 second');
   });
 
-const whereAmI = function (lat, lng) {
-  getPosition()
-    .then(pos => {
-      const { latitude: lat, longitude: lng } = pos.coords;
-      return fetch(
-        `https://geocode.xyz/${lat},${lng},14z?geoit=json&auth=3591584854395899404x59258`
-      );
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`err ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      return fetch(`https:restcountries.com/v3.1/name/${data.country}`);
-    })
-    .then(res => {
-      return res.json();
-    })
-    .then(data => {
-      console.log(data);
-      getCountryNeighbor(data[0]);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-    .finally(() => {
-      countriesContainer.style.opacity = 1;
-    });
-};
+// const whereAmI = function (lat, lng) {
+//   getPosition()
+//     .then(pos => {
+//       const { latitude: lat, longitude: lng } = pos.coords;
+//       return fetch(
+//         `https://geocode.xyz/${lat},${lng},14z?geoit=json&auth=3591584854395899404x59258`
+//       );
+//     })
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error(`err ${response.status}`);
+//       }
+//       return response.json();
+//     })
+//     .then(data => {
+//       return fetch(`https:restcountries.com/v3.1/name/${data.country}`);
+//     })
+//     .then(res => {
+//       return res.json();
+//     })
+//     .then(data => {
+//       console.log(data);
+//       getCountryNeighbor(data[0]);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
 
-const getPosition = function () {
+// const getPosition = function () {
+//   return new Promise(function (resolve, reject) {
+//     navigator.geolocation.getCurrentPosition(resolve, reject);
+//   });
+// };
+
+// getPosition()
+//   .then(pos => console.log(pos))
+//   .catch(err => console.error(err));
+
+// btn.addEventListener('click', whereAmI);
+
+// Challenge 2
+
+const containerImage = document.querySelector('.images');
+let image;
+const createImage = function (imgPath) {
   return new Promise(function (resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
+    image = document.createElement('img');
+    image.src = imgPath;
+
+    image.addEventListener('load', function () {
+      containerImage.appendChild(image);
+      resolve(image);
+      wait(2).then(() => {
+        image.style.display = 'none';
+      });
+    });
+
+    image.addEventListener('error', function () {
+      reject(new Error('image not found'));
+    });
   });
 };
 
-getPosition()
-  .then(pos => console.log(pos))
-  .catch(err => console.error(err));
+let count = 1;
 
-btn.addEventListener('click', whereAmI);
+for (let i = 1; i < 4; i++) {
+  createImage(`img/img-1.jpg`)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => console.log(err));
+}
