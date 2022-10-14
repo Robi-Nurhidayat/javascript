@@ -217,33 +217,48 @@ wait(1)
 
 // Challenge 2
 
-const containerImage = document.querySelector('.images');
-let image;
-const createImage = function (imgPath) {
-  return new Promise(function (resolve, reject) {
-    image = document.createElement('img');
-    image.src = imgPath;
+// const containerImage = document.querySelector('.images');
+// let image;
+// const createImage = function (imgPath) {
+//   return new Promise(function (resolve, reject) {
+//     image = document.createElement('img');
+//     image.src = imgPath;
 
-    image.addEventListener('load', function () {
-      containerImage.appendChild(image);
-      resolve(image);
-      wait(2).then(() => {
-        image.style.display = 'none';
-      });
-    });
+//     image.addEventListener('load', function () {
+//       containerImage.appendChild(image);
+//       resolve(image);
+//       wait(2).then(() => {
+//         image.style.display = 'none';
+//       });
+//     });
 
-    image.addEventListener('error', function () {
-      reject(new Error('image not found'));
-    });
-  });
+//     image.addEventListener('error', function () {
+//       reject(new Error('image not found'));
+//     });
+//   });
+// };
+
+// let count = 1;
+
+// for (let i = 1; i < 4; i++) {
+//   createImage(`img/img-1.jpg`)
+//     .then(res => {
+//       console.log(res);
+//     })
+//     .catch(err => console.log(err));
+// }
+
+// Challenge 2 belum selesai
+
+// Async await
+
+const dimanaSaya = async function (negara) {
+  const response = await fetch(`https://restcountries.com/v3.1/name/${negara}`);
+
+  console.log(response);
+
+  const data = await response.json();
+  console.log(data[0].name.common);
 };
 
-let count = 1;
-
-for (let i = 1; i < 4; i++) {
-  createImage(`img/img-1.jpg`)
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => console.log(err));
-}
+dimanaSaya('indonesia');
