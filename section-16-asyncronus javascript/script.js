@@ -253,12 +253,18 @@ wait(1)
 // Async await
 
 const dimanaSaya = async function (negara) {
-  const response = await fetch(`https://restcountries.com/v3.1/name/${negara}`);
+  try {
+    const response = await fetch(
+      `https://restcountries.com/v3.1/name/${negara}`
+    );
 
-  console.log(response);
+    console.log(response);
 
-  const data = await response.json();
-  console.log(data[0].name.common);
+    const data = await response.json();
+    console.log(data[0].name.common);
+  } catch (err) {
+    alert(err.message);
+  }
 };
 
 dimanaSaya('indonesia');
