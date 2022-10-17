@@ -217,43 +217,43 @@ wait(1)
 
 // Challenge 2
 
-const containerImage = document.querySelector('.images');
-let image;
-const createImage = function (imgPath) {
-  return new Promise(function (resolve, reject) {
-    image = document.createElement('img');
-    image.src = imgPath;
+// const containerImage = document.querySelector('.images');
+// let image;
+// const createImage = function (imgPath) {
+//   return new Promise(function (resolve, reject) {
+//     image = document.createElement('img');
+//     image.src = imgPath;
 
-    image.addEventListener('load', function () {
-      containerImage.appendChild(image);
-      resolve(image);
-    });
+//     image.addEventListener('load', function () {
+//       containerImage.appendChild(image);
+//       resolve(image);
+//     });
 
-    image.addEventListener('error', function () {
-      reject(new Error('image not found'));
-    });
-  });
-};
+//     image.addEventListener('error', function () {
+//       reject(new Error('image not found'));
+//     });
+//   });
+// };
 
-let currentImg;
-createImage(`img/img-1.jpg`)
-  .then(img => {
-    currentImg = img;
-    console.log(img);
-    return wait(2);
-  })
-  .then(() => {
-    currentImg.style.display = 'none';
-    return createImage(`img/img-2.jpg`);
-  })
-  .then(img => {
-    currentImg = img;
-    return wait(2);
-  })
-  .then(() => {
-    currentImg.style.display = 'none';
-  })
-  .catch(err => console.log(err));
+// let currentImg;
+// createImage(`img/img-1.jpg`)
+//   .then(img => {
+//     currentImg = img;
+//     console.log(img);
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImg.style.display = 'none';
+//     return createImage(`img/img-2.jpg`);
+//   })
+//   .then(img => {
+//     currentImg = img;
+//     return wait(2);
+//   })
+//   .then(() => {
+//     currentImg.style.display = 'none';
+//   })
+//   .catch(err => console.log(err));
 
 // let count = 1;
 
@@ -264,19 +264,41 @@ createImage(`img/img-1.jpg`)
 
 // Async await
 
-// const dimanaSaya = async function (negara) {
-//   try {
-//     const response = await fetch(
-//       `https://restcountries.com/v3.1/name/${negara}`
-//     );
+const dimanaSaya = async function (negara) {
+  try {
+    const response = await fetch(
+      `https://restcountries.com/v3.1/name/${negara}`
+    );
 
-//     console.log(response);
+    const data = await response.json();
+    const state = data[0].name.common;
 
-//     const data = await response.json();
-//     console.log(data[0].name.common);
-//   } catch (err) {
-//     alert(err.message);
-//   }
-// };
+    return `saya berada di ${state}`;
+  } catch (err) {
+    console.error(err.message);
+    throw err;
+  }
+};
 
-// dimanaSaya('indonesia');
+console.log('1: zzzzzzzzzzzzzz');
+// dimanaSaya('indonesia')
+//   .then(res => {
+//     console.log(`2: zzzzzzzzzz ${res}`);
+//   })
+//   .catch(err => {
+//     console.error(`2: zzzzzzzzzz ${err}`);
+//   })
+//   .finally(() => {
+//     console.log('3: zzzzzzzzzzzzzz');
+//   });
+
+(async function () {
+  try {
+    const lok = await dimanaSaya('indonesia');
+    console.log(`2: zzzzzzzzzz ${lok}`);
+  } catch (err) {
+    console.error(`2: zzzzzzzzzz ${err}`);
+  } finally {
+    console.log('3: zzzzzzzzzzzzzz');
+  }
+})();
