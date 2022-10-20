@@ -151,25 +151,25 @@ const getCountryNeighbor = function (data) {
 
 // promisfying promise
 
-const wait = function (second) {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, second * 1000);
-  });
-};
+// const wait = function (second) {
+//   return new Promise(function (resolve) {
+//     setTimeout(resolve, second * 1000);
+//   });
+// };
 
-wait(1)
-  .then(() => {
-    console.log('Wait 1 second');
+// wait(1)
+//   .then(() => {
+//     console.log('Wait 1 second');
 
-    return wait(1);
-  })
-  .then(() => {
-    console.log('wait 2 second');
-    return wait(1);
-  })
-  .then(() => {
-    console.log('wait 3 second');
-  });
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log('wait 2 second');
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log('wait 3 second');
+//   });
 
 // const whereAmI = function (lat, lng) {
 //   getPosition()
@@ -292,13 +292,39 @@ console.log('1: zzzzzzzzzzzzzz');
 //     console.log('3: zzzzzzzzzzzzzz');
 //   });
 
-(async function () {
+// (async function () {
+//   try {
+//     const lok = await dimanaSaya('indonesia');
+//     console.log(`2: zzzzzzzzzz ${lok}`);
+//   } catch (err) {
+//     console.error(`2: zzzzzzzzzz ${err}`);
+//   } finally {
+//     console.log('3: zzzzzzzzzzzzzz');
+//   }
+// })();
+
+const getJSON = country => {
+  return fetch(`https://restcountries.com/v3.1/name/${country}`).then(
+    response => {
+      if (!response.ok) {
+        throw new Error(`err ${response.status}`);
+      }
+
+      return response.json();
+    }
+  );
+};
+
+getJSON('indonesia');
+
+const get3Country = async (c1, c2, c3) => {
   try {
-    const lok = await dimanaSaya('indonesia');
-    console.log(`2: zzzzzzzzzz ${lok}`);
+    const data = await Promise.all([getJSON(c1), getJSON(c2), getJSON(c3)]);
+
+    console.log(data.map(d => d[0].capital));
   } catch (err) {
-    console.error(`2: zzzzzzzzzz ${err}`);
-  } finally {
-    console.log('3: zzzzzzzzzzzzzz');
+    console.log(err);
   }
-})();
+};
+
+get3Country('indonesia', 'singapore', 'malaysia');
