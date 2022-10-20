@@ -361,3 +361,15 @@ Promise.race([getJSON('indonesia'), waitingTime(3)])
   .catch(err => {
     console.log(err);
   });
+
+// promise.allSettled
+// promise jenis ini mirip dengan promise.all, perbedaan nya kalau promise.all salah 1 requset nya ada yg reject maka akan membatalkan seluruh requset(err)
+// sedangkan promise.allSettled kebalikan dari promise.all yaitu jika salah 1 atau lebih requset yang di reject, tetap akan melakukan request (tidak error)
+
+Promise.allSettled([
+  Promise.resolve('sukses'),
+  Promise.reject('gagal'),
+  Promise.resolve('Sukses'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.log(err));
