@@ -315,16 +315,49 @@ const getJSON = country => {
   );
 };
 
-getJSON('indonesia');
+// getJSON('indonesia');
 
-const get3Country = async (c1, c2, c3) => {
-  try {
-    const data = await Promise.all([getJSON(c1), getJSON(c2), getJSON(c3)]);
+// const get3Country = async (c1, c2, c3) => {
+//   try {
+//     const data = await Promise.all([getJSON(c1), getJSON(c2), getJSON(c3)]);
 
-    console.log(data.map(d => d[0].capital));
-  } catch (err) {
-    console.log(err);
-  }
+//     console.log(data.map(d => d[0].capital));
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+// get3Country('indonesia', 'singapore', 'malaysia');
+
+// Other Promise Combinator
+
+// Promise.race
+
+(async function () {
+  const res = await Promise.race([
+    getJSON('indonesia'),
+    getJSON('laos'),
+    getJSON('malaysia'),
+  ]);
+
+  console.log(res);
+})();
+
+// penggunaan dari promise.race
+// misalkan user melakukan request, karena koneksi nya buruk, sehingga jadi lama, kita bisa mengatasi nya dengan promise.race. karena bisa memberhentikan hal tertentu
+
+const waitingTime = function (detik) {
+  return new Promise(function (_, reject) {
+    setTimeout(() => {
+      reject(new Error('Requset bad'));
+    }, detik * 1000);
+  });
 };
 
-get3Country('indonesia', 'singapore', 'malaysia');
+Promise.race([getJSON('indonesia'), waitingTime(3)])
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => {
+    console.log(err);
+  });
