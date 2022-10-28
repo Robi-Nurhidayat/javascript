@@ -6,6 +6,14 @@
 // console.log(totalPrice);
 // console.log(totalQuantity);
 
-import * as ShoppingCart from './shoppingCart.js';
+// import * as ShoppingCart from './shoppingCart.js';
 
-ShoppingCart.addToCart('bread', 2000);
+// ShoppingCart.addToCart('bread', 2000);
+
+import add, { cart } from './shoppingCart.js';
+
+add('Roti', 2000);
+add('Ayam', 2000);
+add('daging', 2000);
+
+console.log(cart);
